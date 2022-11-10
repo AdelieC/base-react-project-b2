@@ -1,48 +1,46 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { getProducts, getProductsByCategory } from "../../utils/api/products";
 import ProductsList from "../lists/ProductsList";
-
-const oldProducts = [
-	{
-		name: "Carottes",
-		price: 1000,
-		description: "Carottes non lavées bio...",
-	},
-	{
-		name: "Tomates",
-		price: 1200,
-		description: "Tomates bio...",
-	},
-	{
-		name: "Courge butternut",
-		price: 1000,
-		description: "Une délicieuse courge très chère...",
-	},
-	{
-		name: "Carottes",
-		price: 1000,
-		description: "Carottes non lavées bio...",
-		imageSrc:
-			"https://images.unsplash.com/photo-1445282768818-728615cc910a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-	},
-	{
-		name: "Tomates",
-		price: 1200,
-		description: "Tomates bio...",
-	},
-	{
-		name: "Courge butternut",
-		price: 1000,
-		description: "Une délicieuse courge très chère...",
-	},
-];
 
 const CatalogSection = () => {
 	const [products, setProducts] = useState([]);
-	useEffect(() => {}, []);
+	const { handleSubmit, register } = useForm();
+
+	const onSubmit = async (data) => {
+		const q = data.searchText;
+		if (q?.length) {
+			const filteredProducts = await getProductsByCategory(
+				data.searchText
+			);
+			setProducts(filteredProducts);
+		} else {
+			const allProducts = await getProducts();
+			setProducts(allProducts);
+		}
+	};
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const data = await getProducts();
+			setProducts(data);
+		};
+		fetchProducts();
+	}, []);
 
 	if (!products?.length) return <div>Chargement...</div>;
 	return (
 		<section>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<input
+					type="text"
+					name="searchText"
+					{...register("searchText")}
+				/>
+				<button className="btn btn-primary">Rechercher</button>
+			</form>
+
+			<button>Rechercher</button>
 			<ProductsList products={products} />
 		</section>
 	);

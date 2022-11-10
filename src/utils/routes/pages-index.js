@@ -7,10 +7,3 @@ export const PAGES = {
 	AboutPage,
 	Disclaimer,
 };
-
-const array = ["a", "b", "c"];
-const object = { a: "at", b: "bt", c: "ct" };
-
-const b = array[1];
-
-const a = object[a];

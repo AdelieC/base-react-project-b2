@@ -12,5 +12,12 @@
 		"title": "À propos",
 		"description": "Description qui sera affichée pour la page à propos dans les résultats des moteurs de recherche.",
 		"element": "AboutPage"
+	},
+	{
+		"label": "Mentions légales",
+		"path": "/mentions-legales",
+		"title": "Mentions légales",
+		"description": "Description qui sera affichée pour la page à propos dans les résultats des moteurs de recherche.",
+		"element": "Disclaimer"
 	}
 ]

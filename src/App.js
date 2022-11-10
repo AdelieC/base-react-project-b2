@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import routes from "./utils/routes/routes.json";
+import { PAGES } from "./utils/routes/pages-index";
+import { Helmet } from "react-helmet-async";
+
+const renderPageElement = (pageData) => {
+	const Element = PAGES[pageData.element];
+	return (
+		<>
+			<Helmet>
+				<title>{pageData.title}</title>
+				<meta name="description" value={pageData.description} />
+			</Helmet>
+			<Element />
+		</>
+	);
+};
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Routes>
+			<Route path="/" element={<Layout />}>
+				{routes.map((route) => {
+					return route.path ? (
+						<Route
+							key={"route-" + route.label}
+							path={route.path}
+							element={renderPageElement(route)}
+						/>
+					) : (
+						<Route
+							key={"route-" + route.label}
+							index
+							element={renderPageElement(route)}
+						/>
+					);
+				})}
+			</Route>
+		</Routes>
+	);
 }
 
 export default App;

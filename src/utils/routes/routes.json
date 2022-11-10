@@ -1,0 +1,16 @@
+[
+	{
+		"label": "Accueil",
+		"path": "",
+		"title": "Accueil",
+		"description": "Description qui sera affichée pour la page d'accueil dans les résultats des moteurs de recherche.",
+		"element": "HomePage"
+	},
+	{
+		"label": "A propos",
+		"path": "/a-propos",
+		"title": "À propos",
+		"description": "Description qui sera affichée pour la page à propos dans les résultats des moteurs de recherche.",
+		"element": "AboutPage"
+	}
+]

@@ -1,11 +1,15 @@
-import React from "react";
-import CatalogSection from "../components/sections/CatalogSection";
+import { Helmet } from "react-helmet-async";
 const HomePage = () => {
 	return (
-		<main className="">
-			<h1>Accueil</h1>
-			<CatalogSection />
-		</main>
+		<>
+			<Helmet>
+				<title>Accueil</title>
+				<meta name="description" value="Page d'accueil" />
+			</Helmet>
+			<main className="">
+				<h1>Accueil</h1>
+			</main>
+		</>
 	);
 };
 

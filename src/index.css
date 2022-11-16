@@ -6,6 +6,7 @@
 	main {
 		@apply min-h-screen;
 	}
+
 	h1 {
 		@apply text-5xl font-extrabold text-center;
 	}
